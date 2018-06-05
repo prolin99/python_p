@@ -5,7 +5,7 @@ list1[2]='change'
 s=','.join(list1)
 print(s)
 
-
+ 
 #tuple 和陣列類似，但無法再修改
 t1=1,2,3
 print(t1)
