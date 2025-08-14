@@ -1,18 +1,27 @@
 import yfinance as yf
+import matplotlib.pyplot as plt
 import mplfinance as mpf
 
 import pandas as pd
 
-import matplotlib.pyplot as plt
 
 plt.rc("font", family="Microsoft JhengHei")
+plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']
+
+plt.rcParams['axes.unicode_minus'] = False
+# mpf 亂碼問題
+s = mpf.make_mpf_style(base_mpf_style='yahoo', rc={'font.family': 'Microsoft JhengHei'})
+
+
+
+
 
 # 下載資料 (自動調整股價)
 ticker = "2330.TW"
 # auto_adjust False 才會有 AdJ Close 欄位
 #data = yf.download(ticker, period="max", auto_adjust=False)
 data = yf.download(ticker, period="3mo", interval="1d")
-
+# 直接 mpf.plot(data, type='candle') 會出問題，要再修改由第一行取得正確欄位名稱的問題
 
 # 打印列名以檢查實際的數據結構
 print("Column names:", data.columns)
@@ -53,6 +62,6 @@ print("Final columns:", data.columns)
 print(data.tail())
 
 # 繪製 K 線圖 並設定標題
-mpf.plot(data, type='candle', title='2330 台積電 K 線圖')
+mpf.plot(data, type='candle', style=s, title='2330 台積電 K 線圖')
 
 
