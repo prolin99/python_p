@@ -12,7 +12,7 @@ data = yf.download(ticker, period="max", auto_adjust=False)
 
 
 
-# 繪圖
+# 繪圖 均線
 plt.figure(figsize=(10, 5))
 plt.plot( data.loc['2023':'2024',"Close"], label="收盤價", color="blue")
 plt.plot( data.loc['2023':'2024',"Close"].rolling(20).mean(), label="月均線", color="red")
